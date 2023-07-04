@@ -1,0 +1,46 @@
+#include <stdio.h>
+#include <math.h>
+
+int countIntersectionPoints(int x1, int y1, int r1, int x2, int y2, int r2) {
+    double distance = sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
+
+    if (distance > r1 + r2) {
+        return 0; // Кола не перетинаються
+    } else if (distance == r1 + r2) {
+        return 1; // Кола перетинаються в одній точці
+    } else if (distance < fabs(r1 - r2)) {
+        return 0; // Одне коло міститься всередині іншого кола
+    } else if (distance == fabs(r1 - r2)) {
+        return 1; // Кола перетинаються в одній точці (внутрішня касатиметрія)
+    } else {
+        return 2; // Кола перетинаються в двох точках
+    }
+}
+
+int main() {
+    int x1, y1, r1, x2, y2, r2;
+
+    printf("Enter the coordinates and radius of the first circle (x1, y1, r1): ");
+    scanf("%d%d%d", &x1, &y1, &r1);
+
+    printf("Enter the coordinates and radius of the second circle (x2, y2, r2): ");
+    scanf("%d%d%d", &x2, &y2, &r2);
+
+    int result = countIntersectionPoints(x1, y1, r1, x2, y2, r2);
+
+    if (result == 0) {
+        printf("Circles do not intersect\n");
+    } else if (result == 1)
+    {
+        printf("1 point\n");
+    }
+    else if (result == 2)
+    {
+        printf("2 points\n");
+    }
+    else {
+        printf("Infinitely many points of intersection\n");
+    }
+
+    return 0;
+}
